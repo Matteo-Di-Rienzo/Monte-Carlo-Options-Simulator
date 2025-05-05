@@ -1,5 +1,3 @@
-
-
 double generateZValue(double mean, double stddev);
 double callPayoff(double S, double K);
 double putPayoff(double S, double K);
