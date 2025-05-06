@@ -23,23 +23,24 @@ int main()
     crow::SimpleApp app;
 
     CROW_ROUTE(app, "/")([](){
-        auto html = readFile("../frontend/index.html");
-        return crow::response(html);
+        auto content = readFile("../frontend/index.html");
+        return crow::response(content);
     });
 
     
-    CROW_ROUTE(app, "/js/<path>")([](const std::string& fname){
-        auto content = readFile("../frontend/js/" + fname);
+    CROW_ROUTE(app, "/js/<path>")([](const std::string& fileName){
+        auto content = readFile("../frontend/js/" + fileName);
         crow::response res(content);
         res.set_header("Content-Type", "application/javascript");
         return res;
       });
 
-    CROW_ROUTE(app, "/css/<path>")([](const std::string& fname){
-        auto content = readFile("../frontend/css/" + fname);
+    CROW_ROUTE(app, "/css/<path>")([](const std::string& fileName){
+        auto content = readFile("../frontend/css/" + fileName);
         crow::response res(content);
-        res.set_header("Content-Type", "application/css");
+        res.set_header("Content-Type", "text/css");
         return res;
+
     });
 
 
@@ -54,12 +55,12 @@ int main()
             double S0_ = input_json["initialStockPrice"].d();
             double K_ = input_json["strikePrice"].d();
             double r_ = input_json["riskFreeRate"].d();
-            double v = input_json["volatility"].d();
-            double T = input_json["dte"].d();
-            int numSimulations = input_json["numSimulations"].d();
+            double v_ = input_json["volatility"].d();
+            double T_ = input_json["dte"].d();
+            int numSimulations_ = input_json["numSimulations"].d();
 
-            double callPrice = monteCarloPricing(S0_, K_, r_, v, T, numSimulations, true);
-            double putPrice = monteCarloPricing(S0_, K_, r_, v, T, numSimulations, false);
+            double callPrice = monteCarloPricing(S0_, K_, r_, v_, T_, numSimulations_, true);
+            double putPrice = monteCarloPricing(S0_, K_, r_, v_, T_, numSimulations_, false);
 
             crow::json::wvalue response_json;
 

@@ -17,8 +17,8 @@ calculateButton.addEventListener("click", function(){
         body: JSON.stringify( {
             initialStockPrice: parseFloat(S0.value),
             strikePrice: parseFloat(K.value),
-            riskFreeRate: parseFloat(R.value),
-            volatility: parseFloat(V.value),
+            riskFreeRate: parseFloat(R.value) / 100.0,
+            volatility: parseFloat(V.value) / 100.0,
             dte: parseFloat(T.value),
             numSimulations: parseFloat(X.value)
         })
