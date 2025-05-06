@@ -1,4 +1,6 @@
 const calculateButton = document.getElementById("calculateButton");
+const loadingChart = document.getElementById("loadingChart")
+const chartCanvas = document.getElementById("optionChart")
 
 
 const S0 = document.getElementById("initialStockPrice");
@@ -15,6 +17,14 @@ const optionPut = document.getElementById("putPriceOutput");
 var isChart = null;
 
 calculateButton.addEventListener("click", function(){
+
+    if (loadingChart) {
+        loadingChart.style.display = 'block';
+    }
+    if (chartCanvas) {
+        chartCanvas.style.display = 'none';
+    }
+
     fetch("/pricing", {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
@@ -99,6 +109,17 @@ calculateButton.addEventListener("click", function(){
               }
             }
           });
+
+          if (loadingChart) {
+            loadingChart.style.display = 'none';
+          }
+
+          if (chartCanvas) {
+            chartCanvas.style.display = 'block';
+          }
+
+
+
         })
         .catch(error => {
           console.error('Error fetching data:', error);

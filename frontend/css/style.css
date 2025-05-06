@@ -77,3 +77,8 @@ h2 {
     font-family: monospace;
     color: #0f172a;
 }
+
+
+#loadingChart {
+    display: none;
+}
