@@ -52,14 +52,14 @@ int main()
                 return crow::response(crow::BAD_REQUEST, "Invalid JSON");
             }
             double S0_ = input_json["initialStockPrice"].d();
-            double K = 100.0; // Strike Price
+            double K_ = input_json["strikePrice"].d();
             double r = 0.05; // Risk free rate
             double v = 0.2; // Volatility
             double T = 1; // DTE (years)
             int numSimulations = 1000000; // Number of simulations to run
 
-            double callPrice = monteCarloPricing(S0_, K, r, v, T, numSimulations, true);
-            double putPrice = monteCarloPricing(S0_, K, r, v, T, numSimulations, false);
+            double callPrice = monteCarloPricing(S0_, K_, r, v, T, numSimulations, true);
+            double putPrice = monteCarloPricing(S0_, K_, r, v, T, numSimulations, false);
 
             crow::json::wvalue response_json;
             response_json["callPrice"] = callPrice;

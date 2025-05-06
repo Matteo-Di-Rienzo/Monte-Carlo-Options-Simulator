@@ -1,5 +1,8 @@
 const calculateButton = document.getElementById("calculateButton");
+
 const S0 = document.getElementById("initialStockPrice");
+const K = document.getElementById("strikePrice");
+
 const optionCall = document.getElementById("callPriceOutput");
 const optionPut = document.getElementById("putPriceOption");
 
@@ -7,7 +10,10 @@ calculateButton.addEventListener("click", function(){
     fetch('/pricing', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ initialStockPrice: parseFloat(S0.value) }),
+        body: JSON.stringify({
+            initialStockPrice: parseFloat(S0.value),
+            strikePrice: parseFloat(K.value)
+        }),
     })
 
     .then(response => response.json())
