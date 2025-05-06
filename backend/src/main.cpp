@@ -53,15 +53,16 @@ int main()
             }
             double S0_ = input_json["initialStockPrice"].d();
             double K_ = input_json["strikePrice"].d();
-            double r = 0.05; // Risk free rate
-            double v = 0.2; // Volatility
-            double T = 1; // DTE (years)
-            int numSimulations = 1000000; // Number of simulations to run
+            double r_ = input_json["riskFreeRate"].d();
+            double v = input_json["volatility"].d();
+            double T = input_json["dte"].d();
+            int numSimulations = input_json["numSimulations"].d();
 
-            double callPrice = monteCarloPricing(S0_, K_, r, v, T, numSimulations, true);
-            double putPrice = monteCarloPricing(S0_, K_, r, v, T, numSimulations, false);
+            double callPrice = monteCarloPricing(S0_, K_, r_, v, T, numSimulations, true);
+            double putPrice = monteCarloPricing(S0_, K_, r_, v, T, numSimulations, false);
 
             crow::json::wvalue response_json;
+
             response_json["callPrice"] = callPrice;
             response_json["putPrice"] = putPrice;
 
