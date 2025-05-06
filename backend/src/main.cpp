@@ -3,25 +3,47 @@
 #include <cmath>
 #include <random>
 #include "../include/monteCarlo.h"
+#include <fstream>
+#include <sstream>
 
+
+std::string readFile(const std::string& path) {
+    std::ifstream file(path);
+        if (!file) {
+            return "Error reading file";
+        }
+        std::ostringstream buffer;
+        buffer << file.rdbuf();
+        return buffer.str();
+}
+        
 
 int main()
 {
     crow::SimpleApp app;
 
     CROW_ROUTE(app, "/")([](){
-        std::ifstream file("../frontend/index.html"); // Open the index.html file
-        if (!file.is_open()) {
-            return crow::response(404, "File not found"); // Handle the case where the file doesn't exist
-        }
-        std::stringstream buffer;
-        buffer << file.rdbuf(); // Read the entire file content into a stringstream
-        return crow::response(buffer.str()); // Return the file content as the response
+        auto html = readFile("../frontend/index.html");
+        return crow::response(html);
+    });
+
+    
+    CROW_ROUTE(app, "/js/<path>")([](const std::string& fname){
+        auto content = readFile("../frontend/js/" + fname);
+        crow::response res(content);
+        res.set_header("Content-Type", "application/javascript");
+        return res;
+      });
+
+    CROW_ROUTE(app, "/css/<path>")([](const std::string& fname){
+        auto content = readFile("../frontend/css/" + fname);
+        crow::response res(content);
+        res.set_header("Content-Type", "application/css");
+        return res;
     });
 
 
-    CROW_ROUTE(app, "/pricing").methods(crow::HTTPMethod::POST)(
-        [](const crow::request& req)
+    CROW_ROUTE(app, "/pricing").methods(crow::HTTPMethod::POST)([](const crow::request& req)
         {
             crow::json::rvalue input_json;
         try {

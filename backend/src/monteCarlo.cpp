@@ -13,8 +13,8 @@
 // This function will generate the Z value.
 
 double generateZValue(double mean, double stddev) {
-    static std::mt19937 generator(std::random_device{}()); // Generate pseudorandom number, generate seed 
-    std::normal_distribution<double> distribution(mean, stddev); // Create distribution object
+    static std::mt19937 generator(std::random_device{}());
+    std::normal_distribution<double> distribution(mean, stddev);
     return distribution(generator);
 }
 
