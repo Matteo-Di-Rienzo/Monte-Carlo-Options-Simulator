@@ -77,6 +77,45 @@ int main()
         }
     );
 
+
+    CROW_ROUTE(app, "/price_graph").methods(crow::HTTPMethod::POST)([](const crow::request& req)
+    {
+        crow::json::rvalue input_json = crow::json::load(req.body);
+
+        double S0_ = input_json["initialStockPrice"].d();
+        double K_ = input_json["strikePrice"].d();
+        double r_ = input_json["riskFreeRate"].d();
+        double v_ = input_json["volatility"].d();
+        int numSimulations_ = input_json["numSimulations"].d();;
+
+        double T_ = input_json["dte"].d();
+        double stepping = T_ / 100;
+
+
+        crow::json::wvalue response;
+        crow::json::wvalue callData;
+        crow::json::wvalue putData;
+        int index = 0;
+
+        for (double t = T_; t > 0.0; t -= stepping) {
+
+            double callPrice = monteCarloPricing(S0_, K_, r_, v_, t, numSimulations_, true);
+            double putPrice = monteCarloPricing(S0_, K_, r_, v_, t, numSimulations_, false);
+
+            callData[index]["dte"] = t;
+            callData[index]["price"] = callPrice;
+
+            putData[index]["dte"] = t;
+            putData[index]["price"] = putPrice;
+
+            ++index;
+        }
+        response["callPrices"] = std::move(callData);
+        response["putPrices"] = std::move(putData);
+
+        return crow::response(response);
+    });
+
     app.port(8000).multithreaded().run();
     return 0;
 }
