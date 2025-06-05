@@ -10,12 +10,12 @@ Developed as a demonstration of full-stack web development principles and comput
 
 * **Backend:**
     * C++: Core simulation logic and backend application.
-    * Crow: A fast and lightweight C++ microframework for web development.
+    * Crow: Lightweight C++ framework for full stack applications.
 * **Frontend:**
-    * HTML5: Structure of the web pages.
-    * CSS3: Styling and layout.
+    * HTML: Structure of the web pages.
+    * CSS: Styling and layout.
     * JavaScript: Frontend logic, user interaction, and fetching data from the backend.
-    * Chart.js: A flexible JavaScript charting library for data visualization.
+    * Chart.js: JavaScript charting tool for visualizing option's prices.
 
 ## Features
 
@@ -34,10 +34,9 @@ Developed as a demonstration of full-stack web development principles and comput
 
 To build and run this project, you will need:
 
-* A C++ compiler (supporting C++11 or later)
-* CMake (version 3.0 or higher)
-* The Crow C++ framework (follow installation instructions on the Crow GitHub page)
-* A web browser
+* A C++ compiler
+* CMake
+* The Crow C++ framework
 
 Follow these steps:
 
@@ -65,11 +64,9 @@ Follow these steps:
 
 * Implement pricing for American options.
 * Implement support for exotic options (Asian options).
-* Add support for other option pricing models (e.g., Black-Scholes for comparison).
+* Add support for other option pricing models (Black-Scholes for comparison).
 * Improve the visualization with interactive features or additional Greeks.
-* Add input validation and error handling on the frontend.
-* Enhance the user interface and styling.
-* Implement more sophisticated Monte Carlo variance reduction techniques.
+* Enhance the UI/UX.
 
 ## Acknowledgements
 
