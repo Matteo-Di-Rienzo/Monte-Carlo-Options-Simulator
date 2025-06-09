@@ -82,3 +82,8 @@ h2 {
 #loadingChart {
     display: none;
 }
+
+.Inputs {
+    padding-top: 20px;
+    text-align: center;
+}   
