@@ -55,14 +55,18 @@
     
         <div id="result" class="outputs">
             <h2>Outputs:</h2>
+            <div id="output-wrapper">
             <p id="callPriceOutput"></p>
             <p id="putPriceOutput"></p>
+            </div>
 
 
             <h2>Option Price Over Time</h2>
 
             <h3 id="loadingChart">Loading Chart</h3>
-            <canvas id="optionChart" width="400" height="200"></canvas>
+            <div id="chart-wrapper">
+            <canvas id="optionChart"></canvas>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="js/App.js"></script>

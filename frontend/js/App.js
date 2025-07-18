@@ -93,6 +93,7 @@ calculateButton.addEventListener("click", function(){
             },
             options: {
               responsive: true,
+              maintainAspectRatio: false,
               scales: {
                 x: {
                   title: {
@@ -125,6 +126,4 @@ calculateButton.addEventListener("click", function(){
           console.error('Error fetching data:', error);
     });
 
-})
-
-
+});
