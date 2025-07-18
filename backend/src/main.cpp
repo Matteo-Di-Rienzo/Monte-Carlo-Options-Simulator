@@ -7,6 +7,11 @@
 #include <sstream>
 
 
+double roundToDecimal(double value, int decimals) {
+    double multiplier = std::pow(10.0, decimals);
+    return std::round(value * multiplier) / multiplier;
+}
+
 std::string readFile(const std::string& path) {
     std::ifstream file(path);
         if (!file) {
@@ -101,6 +106,10 @@ int main()
 
             double callPrice = monteCarloPricing(S0_, K_, r_, v_, t, numSimulations_, true);
             double putPrice = monteCarloPricing(S0_, K_, r_, v_, t, numSimulations_, false);
+
+            callPrice = roundToDecimal(callPrice, 3);
+            putPrice = roundToDecimal(putPrice, 3);
+            t = roundToDecimal(t, 6);
 
             callData[index]["dte"] = t;
             callData[index]["price"] = callPrice;
