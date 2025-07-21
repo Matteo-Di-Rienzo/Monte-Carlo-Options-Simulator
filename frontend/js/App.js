@@ -18,6 +18,11 @@ var isChart = null;
 
 calculateButton.addEventListener("click", function(){
 
+    if (parseFloat(X.value) > 10000) {
+      alert("Input can not be more than 10000");
+      return;
+    }
+
     if (loadingChart) {
         loadingChart.style.display = 'block';
     }
